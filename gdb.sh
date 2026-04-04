@@ -102,7 +102,7 @@ fi
 
 # Debloating per distro
 case "$DISTRO_NAME" in
-	"ubuntu-26")
+	ubuntu-26)
 		sudo apt purge software-properties-* gnome-font-viewer update-manager gnome-remote-desktop gnome-user-docs gnome-text-editor \
 		gnome-characters gnome-keyring gnome-logs sysprof yelp orca brltty file-roller deja-dup simple-scan libreoffice-* remmina* \
 		shotwell* usb-creator-* transmission-* -y
@@ -123,7 +123,7 @@ case "$DISTRO_NAME" in
 		sudo rm -rf /var/cache/*
 		;;
 
-	"ubuntu-24")
+	ubuntu-24)
 		sudo apt purge software-properties-* gnome-font-viewer update-manager gnome-remote-desktop gnome-user-docs gnome-text-editor gnome-power-manager \
 		gnome-characters gnome-keyring gnome-logs yelp orca brltty simple-scan deja-dup file-roller libreoffice-* remmina* shotwell usb-creator-* transmission* -y
 
@@ -142,14 +142,14 @@ case "$DISTRO_NAME" in
 		sudo apt autoclean -y
 		;;
 
-	"fedora-*")
+	fedora-*)
 		sudo dnf remove gnome-calendar firefox gnome-connections gnome-software gnome-text-editor gnome-remote-desktop gnome-user-docs \
 		orca brltty epiphany-runtime simple-scan nano gnome-characters gnome-abrt libreoffice-core gnome-contacts gnome-weather gnome-maps \
 		mediawriter gnome-boxes gnome-font-viewer gnome-logs gnome-tour yelp malcontent-ui-libs -y
 		sudo dnf autoremove -y
 		;;
 
-	"debian-13")
+	debian-13)
 		sudo apt purge gnome-contacts gnome-calendar gnome-connections gnome-software gnome-text-editor gnome-remote-desktop \
 		gnome-user-docs gnome-characters gnome-weather gnome-maps gnome-font-viewer gnome-logs gnome-tour gnome-sound-recorder \
 		gnome-keyring orca brltty simple-scan nano yelp malcontent evolution libreoffice-base-core libreoffice-core libreoffice-draw \
@@ -159,7 +159,7 @@ case "$DISTRO_NAME" in
 		sudo apt autoclean -y
 		;;
 
-	"manjaro")
+	manjaro)
 		sudo pacman -Rns --noconfirm gnome-contacts gnome-calendar gnome-connections gnome-text-editor gnome-remote-desktop gnome-user-docs \
 		gnome-characters gnome-weather gnome-maps gnome-font-viewer gnome-logs gnome-tour gnome-keyring gnome-chess gnome-layout-switcher \
 		gnome-firmware simple-scan nano nano-syntax-highlighting seahorse yelp malcontent file-roller deja-dup endeavour \
@@ -173,7 +173,7 @@ case "$DISTRO_NAME" in
 		sudo rm -rf /var/cache/pacman/pkg/*
 		;;
 
-	"arch")
+	arch)
 		sudo pacman -Rns --noconfirm gnome-software gnome-calendar gnome-text-editor gnome-maps gnome-contacts gnome-connections gnome-weather \
 		gnome-characters gnome-tour gnome-logs gnome-font-viewer gnome-remote-desktop gnome-user-docs yelp orca brltty epiphany malcontent simple-scan nano htop
 
