@@ -9,18 +9,22 @@ DISTRO_VERSION=$(cat /etc/os-release | grep -i "VERSION_ID" | cut -d '=' -f 2 | 
 verify_compatible_distro_version ()
 {
 	case "$DISTRO_VERSION" in
+		"2604")
+			DISTRO_NAME="ubuntu-26"
+			;;
 		"2404")
 			DISTRO_NAME="ubuntu-24"
 			;;
 		"43")
 			DISTRO_NAME="fedora-43"
 			;;
+		"44")
+			DISTRO_NAME="fedora-44"
+			;;
 		"13")
 			DISTRO_NAME="debian-13"
 			;;
-		"2604")
-			DISTRO_NAME="ubuntu-26"
-			;;
+
 		*)
 			DISTRO_NAME="$DISTRO_NAME"
 			;;
@@ -88,37 +92,16 @@ else
 	exit 1
 fi
 
+if [ DISTRO_NAME="debian-13" ]; then
+	if [[ $UID -eq 0 ]]; then
+		echo "Confirmed running as root for Debian"
+	else
+		echo "Because you're running debian, you need to run the script as root: 'su -'"
+	fi
+fi
+
 # Debloating per distro
 case "$DISTRO_NAME" in
-	"debian-13")
-		sudo apt purge gnome-contacts gnome-calendar gnome-connections gnome-software gnome-text-editor gnome-remote-desktop \
-		gnome-user-docs gnome-characters gnome-abrt gnome-weather gnome-maps gnome-font-viewer gnome-logs gnome-tour gnome-sound-recorder \
-		gnome-keyring orca brltty simple-scan nano yelp malcontent evolution libreoffice-base-core libreoffice-core libreoffice-draw \
-		libreoffice-impress libreoffice-math libreoffice-gtk3 libreoffice-common shotwell -y
-
-		sudo apt autoremove -y
-		;;
-
-	"ubuntu-24")
-		sudo apt purge software-properties-* gnome-font-viewer update-manager gnome-remote-desktop gnome-user-docs gnome-text-editor gnome-power-manager \
-		gnome-characters gnome-keyring gnome-logs yelp orca brltty simple-scan deja-dup file-roller libreoffice-* remmina* shotwell usb-creator-* transmission* -y
-
-		# Purging snap bloat:
-		for i in {1..2}; do
-			for package in $(snap list | tail -n +2 | cut -d ' ' -f 1); do
-				sudo snap remove --purge "$package" || true
-			done
-		done
-
-		sudo systemctl disable --now snapd
-		sudo apt purge snapd -y
-		sudo rm -rf /snap /var/snap /var/lib/snapd /var/cache/snapd /usr/lib/snapd ~/snap
-
-		sudo apt autoremove --purge -y
-		sudo apt autoclean -y
-		sudo rm -rf /var/cache/*
-		;;
-
 	"ubuntu-26")
 		sudo apt purge software-properties-* gnome-font-viewer update-manager gnome-remote-desktop gnome-user-docs gnome-text-editor \
 		gnome-characters gnome-keyring gnome-logs sysprof yelp orca brltty file-roller deja-dup simple-scan libreoffice-* remmina* \
@@ -140,11 +123,40 @@ case "$DISTRO_NAME" in
 		sudo rm -rf /var/cache/*
 		;;
 
+	"ubuntu-24")
+		sudo apt purge software-properties-* gnome-font-viewer update-manager gnome-remote-desktop gnome-user-docs gnome-text-editor gnome-power-manager \
+		gnome-characters gnome-keyring gnome-logs yelp orca brltty simple-scan deja-dup file-roller libreoffice-* remmina* shotwell usb-creator-* transmission* -y
 
-	"fedora-43")
+		# Purging snap bloat:
+		for i in {1..2}; do
+			for package in $(snap list | tail -n +2 | cut -d ' ' -f 1); do
+				sudo snap remove --purge "$package" || true
+			done
+		done
+
+		sudo systemctl disable --now snapd
+		sudo apt purge snapd -y
+		sudo rm -rf /snap /var/snap /var/lib/snapd /var/cache/snapd /usr/lib/snapd ~/snap
+
+		sudo apt autoremove --purge -y
+		sudo apt autoclean -y
+		;;
+
+	"fedora-*")
 		sudo dnf remove gnome-calendar firefox gnome-connections gnome-software gnome-text-editor gnome-remote-desktop gnome-user-docs \
 		orca brltty epiphany-runtime simple-scan nano gnome-characters gnome-abrt libreoffice-core gnome-contacts gnome-weather gnome-maps \
 		mediawriter gnome-boxes gnome-font-viewer gnome-logs gnome-tour yelp malcontent-ui-libs -y
+		sudo dnf autoremove -y
+		;;
+
+	"debian-13")
+		sudo apt purge gnome-contacts gnome-calendar gnome-connections gnome-software gnome-text-editor gnome-remote-desktop \
+		gnome-user-docs gnome-characters gnome-weather gnome-maps gnome-font-viewer gnome-logs gnome-tour gnome-sound-recorder \
+		gnome-keyring orca brltty simple-scan nano yelp malcontent evolution libreoffice-base-core libreoffice-core libreoffice-draw \
+		libreoffice-impress libreoffice-math libreoffice-gtk3 libreoffice-common shotwell file-roller firefox-esr -y
+
+		sudo apt autoremove --purge -y
+		sudo apt autoclean -y
 		;;
 
 	"manjaro")
@@ -155,13 +167,24 @@ case "$DISTRO_NAME" in
 		manjaro-application-utility pamac-gtk pamac-gnome-integration libpamac-flatpak-plugin manjaro-hello manjaro-settings-manager-notifier \
 		manjaro-settings-manager qt5-base qt5-svg qt5ct qt6-base qt6-svg qt6ct openconnect stoken networkmanager-vpn-plugin-openconnect \
 		networkmanager-openconnect gufw system-config-printer collision gnome-boxes gnome-mines gnome-shell-extension-gtk4-desktop-icons-ng htop
+
+		sudo pacman -Rns $(sudo pacman -Qtdq) --noconfirm
+		sudo pacman -Scc --noconfirm
+		sudo rm -rf /var/cache/pacman/pkg/*
 		;;
 
 	"arch")
 		sudo pacman -Rns --noconfirm gnome-software gnome-calendar gnome-text-editor gnome-maps gnome-contacts gnome-connections gnome-weather \
 		gnome-characters gnome-tour gnome-logs gnome-font-viewer gnome-remote-desktop gnome-user-docs yelp orca brltty epiphany malcontent simple-scan nano htop
+
+		sudo pacman -Rns $(sudo pacman -Qtdq) --noconfirm
+		sudo pacman -Scc --noconfirm
+		sudo rm -rf /var/cache/pacman/pkg/*
 		;;
 esac
+
+# Removing /var/cache stuff:
+sudo rm -rf /var/cache/*
 
 # Removing clocks from search for speed
 dconf write /org/gnome/desktop/search-providers/disabled "['org.gnome.clocks.desktop']"
