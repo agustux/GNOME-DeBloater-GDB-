@@ -168,8 +168,8 @@ case "$DISTRO_NAME" in
 		manjaro-settings-manager qt5-base qt5-svg qt5ct qt6-base qt6-svg qt6ct openconnect stoken networkmanager-vpn-plugin-openconnect \
 		networkmanager-openconnect gufw system-config-printer collision gnome-boxes gnome-mines gnome-shell-extension-gtk4-desktop-icons-ng htop
 
-		sudo pacman -Rns $(sudo pacman -Qtdq) --noconfirm
-		sudo pacman -Scc --noconfirm
+		sudo pacman -Rns $(sudo pacman -Qtdq) --noconfirm || true
+		sudo pacman -Scc --noconfirm || true
 		sudo rm -rf /var/cache/pacman/pkg/*
 		;;
 
@@ -177,8 +177,8 @@ case "$DISTRO_NAME" in
 		sudo pacman -Rns --noconfirm gnome-software gnome-calendar gnome-text-editor gnome-maps gnome-contacts gnome-connections gnome-weather \
 		gnome-characters gnome-tour gnome-logs gnome-font-viewer gnome-remote-desktop gnome-user-docs yelp orca brltty epiphany malcontent simple-scan nano htop
 
-		sudo pacman -Rns $(sudo pacman -Qtdq) --noconfirm
-		sudo pacman -Scc --noconfirm
+		sudo pacman -Rns $(sudo pacman -Qtdq) --noconfirm || true
+		sudo pacman -Scc --noconfirm || true
 		sudo rm -rf /var/cache/pacman/pkg/*
 		;;
 esac
