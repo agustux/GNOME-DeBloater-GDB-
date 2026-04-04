@@ -18,10 +18,10 @@ Both these tables come from testing in VMs:
 | Ubuntu 26.04 | 1250 MB used/1700 MB buff/cache | 1050 MB used/900 MB buff/cache |
 | Ubuntu 24.04 | 1150 MB used/1700 MB buff/cache | 900 MB used/800 MB buff/cache |
 | Fedora 44 | 1400 MB used/1400 MB buff/cache | 1250 MB used/1150 MB buff/cache |
-| Fedora 43 | 1600 MB used/1850 MB buff/cache | 1300MB used/1450 MB buff/cache |
+| Fedora 43 | 1600 MB used/1850 MB buff/cache | 1300 MB used/1450 MB buff/cache |
 | Debian 13 | 1000 MB used/600 MB buff/cache | 850 MB used/550 MB buff/cache |
-| Manjaro | 1300 MB used/1700 buff/cache | 1000MB used/1400 MB buff/cache |
-| Arch | 1150 MB used/1000 buff/cache | -> |
+| Manjaro | 1300 MB used/1700 MB buff/cache | 1000 MB used/1400 MB buff/cache |
+| Arch | 1150 MB used/1000 MB buff/cache | 900 MB used/900 MB buff/cache |
 
 ### Disk Savings (Without Swap file)
 | Distros Supported | Bloated Disk Usage | Debloated Disk Usage |
@@ -32,5 +32,5 @@ Both these tables come from testing in VMs:
 | Fedora 43 | 9.3 GB | 6.3 GB |
 | Debian 13 | 5.1 GB | 4.1 GB |
 | Manjaro | 8.1 GB | 6.3 GB |
-| Arch | 5.7 GB | |
+| Arch | 5.7 GB | 4.0 GB |
 
