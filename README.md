@@ -3,7 +3,7 @@
 Debloater for supported distros on GNOME
 
 Prerequisites:
-- curl (for ubuntu/debian: ``sudo apt install curl -y``
+- curl (for ubuntu/debian: ``sudo apt install curl -y``)
 
 ```
 cd; curl -LOf https://raw.githubusercontent.com/agustux/GNOME-DeBloater-GDB-/main/gdb.sh && bash gdb.sh
