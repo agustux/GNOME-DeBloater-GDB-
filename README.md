@@ -7,7 +7,7 @@ WARNING: will also remove firefox, make sure you have another browser installed 
 - wget (you probably have it unless you didn't select standard system utilities for debian, in which case: `sudo apt install wget -y`)
 
 ```
-cd; wget https://raw.githubusercontent.com/agustux/GNOME-DeBloater-GDB-/main/gdb.sh && bash gdb.sh
+cd; wget https://raw.githubusercontent.com/agustux/GDB/main/gdb.sh && bash gdb.sh
 ```
 
 Both these tables come from testing in VMs:
