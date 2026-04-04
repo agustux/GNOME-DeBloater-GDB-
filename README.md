@@ -6,7 +6,7 @@ Debloater for supported distros on GNOME
 cd; curl -LOf https://raw.githubusercontent.com/agustux/GNOME-DeBloater-GDB-/main/gdb.sh && bash gdb.sh
 ```
 
-| Distro Supported | Bloated RAM Usage | Debloated RAM Usage|
+| Distros Supported | Bloated RAM Usage | Debloated RAM Usage|
 |------------------|-------------------|--------------------|
 | Ubuntu 26.04 | 1250 MB used/1700 MB buff/cache |   -> 1050 MB used/900 MB buff/cache |
 | Ubuntu 24.04 | 1150 MB used/1700 MB buff/cache |    -> |
