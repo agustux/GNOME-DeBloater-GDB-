@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -ex
+set -e
 
 SUPPORTED_DISTRO_NAMES=( "debian" "ubuntu" "fedora" "manjaro" "arch" )
 DISTRO_NAME=$(cat /etc/os-release | grep -m 1 -i "ID" | cut -d '=' -f 2)
