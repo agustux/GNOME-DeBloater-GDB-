@@ -101,7 +101,7 @@ case "$DISTRO_NAME" in
 
 	"ubuntu-24")
 		sudo apt purge software-properties-* gnome-font-viewer update-manager gnome-remote-desktop gnome-user-docs gnome-text-editor gnome-power-manager \
-		gnome-characters gnome-keyring gnome-logs yelp orca brltty -y
+		gnome-characters gnome-keyring gnome-logs yelp orca brltty simple-scan deja-dup file-roller libreoffice-* remmina* shotwell usb-creator-* transmission* -y
 
 		# Purging snap bloat:
 		for i in {1..2}; do
@@ -116,11 +116,13 @@ case "$DISTRO_NAME" in
 
 		sudo apt autoremove --purge -y
 		sudo apt autoclean -y
+		sudo rm -rf /var/cache/*
 		;;
 
 	"ubuntu-26")
 		sudo apt purge software-properties-* gnome-font-viewer update-manager gnome-remote-desktop gnome-user-docs gnome-text-editor \
-		gnome-characters gnome-keyring gnome-logs sysprof yelp orca brltty -y
+		gnome-characters gnome-keyring gnome-logs sysprof yelp orca brltty file-roller deja-dup simple-scan libreoffice-* remmina* \
+		shotwell* usb-creator-* transmission-* -y
 
 		# Purging snap bloat:
 		for i in {1..2}; do
@@ -135,6 +137,7 @@ case "$DISTRO_NAME" in
 
 		sudo apt autoremove --purge -y
 		sudo apt autoclean -y
+		sudo rm -rf /var/cache/*
 		;;
 
 
@@ -145,18 +148,18 @@ case "$DISTRO_NAME" in
 		;;
 
 	"manjaro")
-		sudo pacman -Rns --noconfirm gnome-contacts gnome-calendar gnome-connections gnome-text-editor gnome-remote-desktop gnome-user-docs \ 
+		sudo pacman -Rns --noconfirm gnome-contacts gnome-calendar gnome-connections gnome-text-editor gnome-remote-desktop gnome-user-docs \
 		gnome-characters gnome-weather gnome-maps gnome-font-viewer gnome-logs gnome-tour gnome-keyring gnome-chess gnome-layout-switcher \
-		gnome-firmware simple-scan nano nano-syntax-highlighting seahorse yelp malcontent file-roller deja-dup desktop-file-utils endeavour \
+		gnome-firmware simple-scan nano nano-syntax-highlighting seahorse yelp malcontent file-roller deja-dup endeavour \
 		fragments kvantum kvantum-manjaro micro quadrapassel thunderbird firefox iagno webapp-manager timeshift timeshift-autosnap-manjaro \
 		manjaro-application-utility pamac-gtk pamac-gnome-integration libpamac-flatpak-plugin manjaro-hello manjaro-settings-manager-notifier \
-		manjaro-settings-manager qt5-base qt5-svg qt5ct qt6-base qt6-svg qt6ct openconnect stoken \
-		networkmanager-vpn-plugin-openconnect networkmanager-openconnect gufw system-config-printer
+		manjaro-settings-manager qt5-base qt5-svg qt5ct qt6-base qt6-svg qt6ct openconnect stoken networkmanager-vpn-plugin-openconnect \
+		networkmanager-openconnect gufw system-config-printer collision gnome-boxes gnome-mines gnome-shell-extension-gtk4-desktop-icons-ng htop
 		;;
 
 	"arch")
 		sudo pacman -Rns --noconfirm gnome-software gnome-calendar gnome-text-editor gnome-maps gnome-contacts gnome-connections gnome-weather \
-		gnome-characters gnome-tour gnome-logs gnome-font-viewer gnome-remote-desktop gnome-user-docs yelp orca brltty epiphany malcontent simple-scan nano
+		gnome-characters gnome-tour gnome-logs gnome-font-viewer gnome-remote-desktop gnome-user-docs yelp orca brltty epiphany malcontent simple-scan nano htop
 		;;
 esac
 
